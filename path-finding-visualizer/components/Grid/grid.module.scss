@@ -1,0 +1,22 @@
+.container
+{
+    padding: 10px;
+}
+
+.last-column-child
+{
+    border-right-width:  1px !important;
+}
+
+.last-row-child
+{
+    border-bottom-width:1px !important;
+}
+
+.row
+{
+    font-size: 0;
+    min-width: 1440px;
+    margin: auto auto;
+    text-align: center;
+}

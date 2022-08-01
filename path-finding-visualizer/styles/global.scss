@@ -1,0 +1,47 @@
+.rock
+{
+    background-color: #333333;
+    border-top-width: 0px !important;
+    border-left-width: 0px !important;
+    animation: beingRock 0.3s ease-out;
+}
+
+.focused
+{
+    transform: scale(0.5);
+}
+
+.explored
+{
+    background-color: #43e3fd;
+    animation: beingExplored 0.3s ease-in;
+    transition: all 0.2s;
+}
+
+.followExplore
+{
+    background-color: red !important;
+    border-radius: 0px !important;
+    transform: scale(1) !important;
+    animation: none !important;
+}
+
+@keyframes beingExplored {
+    0% { transform: scale(0); background-color: #3d69a0 ; border-radius: 999px;}
+    25% { transform: scale(0.5); background-color: #5687d0}
+    50% { transform: scale(1); background-color: #62b7d1 ; border-radius: 10px;}
+    75% { transform: scale(1.25); background-color: #6be3b5; }
+    100%{ transform: scale(1);background-color: #43e3fd ; border-radius: 0px;    
+        }
+}
+
+
+@keyframes beingRock {
+    0% { transform: scale(0); background-color: white; border:0px;}
+    25% { transform: scale(0.5);}
+    50% { transform: scale(1);}
+    75% { transform: scale(1.25); }
+    100%{ transform: scale(1);background-color: #292929;     
+        }
+}
+
