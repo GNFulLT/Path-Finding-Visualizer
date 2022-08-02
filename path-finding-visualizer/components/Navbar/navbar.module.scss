@@ -7,6 +7,20 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    & .startDiv
+    {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap:20px;
+    }
+    & .focused
+    {
+        background-color: #15b7b6;
+        border-radius: 7px;
+        transition: background-color 0.4s;
+    }
     & ul 
     {
         display: flex;
@@ -17,4 +31,44 @@
             cursor: pointer;
         }
     }
+    & .algos
+    {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: center;
+        gap:5px;
+        padding:7px 10px;
+    }
+    & .drop-down-menu
+    {
+        position: absolute;
+        top: 60px;
+        background-color: rgba(0,206,187, 1);
+        width: 150px;
+        overflow: hidden;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        animation: dropDownAnim 0.4s;
+        & .drop-down-item
+        {
+            padding: 10px 0;
+            padding-left: 10px;
+            text-align: start;
+            border-top: 1px solid transparent;
+            border-bottom: 1px solid transparent;
+            font-size: 12px;
+            width: 100%;
+            &:hover
+            {
+                background-color: #00a693;
+                transition: all 0.2s;
+            }
+        }
+    }
+}
+
+@keyframes dropDownAnim
+{
+    0%{opacity: 0; transform: translateY(-50%);}
+    100%{opacity: 1;}
 }
