@@ -248,6 +248,8 @@ const GridSystemProvider : React.FC<any> = ({children}) =>
             value?.current?.classList.remove("explored");
         })
         exploreds = new Map<number,RefObject<HTMLDivElement>>();
+
+        clearAllShortestPath();
     }
 
     const clearAllThings = () =>
