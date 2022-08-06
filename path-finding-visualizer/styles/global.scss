@@ -25,6 +25,15 @@
     transform: scale(1) !important;
     animation: none !important;
 }
+.shortest
+{
+    background-color: yellow !important;
+}
+
+.red
+{
+    background-color: red !important;
+}
 
 @keyframes beingExplored {
     0% { transform: scale(0); background-color: #3d69a0 ; border-radius: 999px;}

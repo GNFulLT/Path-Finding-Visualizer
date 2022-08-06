@@ -24,6 +24,8 @@ interface GridSystemType
 let rocks  = new Map<number,RefObject<HTMLDivElement>>();
 let grid =  new Map<number,RefObject<HTMLDivElement>>();
 let exploreds = new Map<number,RefObject<HTMLDivElement>>();
+let shortestPaths = new Map<number,RefObject<HTMLDivElement>>();
+
 let _rowCount = 0;
 let _columnCount = 0;
 let _maxIndex = 0;
@@ -32,6 +34,34 @@ let startIndexClicked = false;
 let gEndIndex = 0;
 let lastExplore : RefObject<HTMLDivElement> | null = null;
 let isAlgorithmPlaying = false;
+
+export const setRed = (row:number,column:number) =>
+{
+    const id = ((row)*_columnCount)+column;
+    if(grid.get(id)?.current?.classList.contains("red"))
+        return;
+        grid.get(id)?.current?.classList.add("red")
+    return;
+}
+
+export const clearAllShortestPath = () =>
+{
+    shortestPaths.forEach((value,key) => {
+        if(!value?.current?.classList.contains("shortest"))
+            return;
+        value?.current?.classList.remove("shortest")
+    })
+}
+
+export const setShortestPath = (row:number,column:number) =>
+{
+    const id = ((row)*_columnCount)+column;
+    if(grid.get(id)?.current?.classList.contains("shortest"))
+        return;
+    grid.get(id)?.current?.classList.add("shortest")
+    shortestPaths.set(id,grid.get(id)!);
+    return;
+}
 
 export const isExplored = (row:number,column:number) : boolean => 
 {
@@ -100,10 +130,10 @@ export const explore = (row:number,column:number) : boolean =>
 
 export const getRowColById = (id:number) => 
 {
-    const col = id % _columnCount;
+    const column = id % _columnCount;
     const row = Math.floor(id / _columnCount);
 
-    return {row,col};
+    return {row,column};
 
 }
 
@@ -225,6 +255,7 @@ const GridSystemProvider : React.FC<any> = ({children}) =>
         
         clearAllRocks();
         clearAllExploreds();
+        clearAllShortestPath();
     }
 
     const initializeGrid = (rowCount:number,columnCount:number) =>

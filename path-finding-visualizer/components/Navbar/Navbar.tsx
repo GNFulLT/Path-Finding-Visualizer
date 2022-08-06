@@ -5,7 +5,8 @@ import {tryToFind as bfsTryToFind} from "../../algorithms/bfsPF";
 import {tryToFind as dfsTryToFind} from "../../algorithms/dfsPF";
 import {AiFillCaretDown} from "react-icons/ai";
 import { getRowColById } from '../../Hooks/useGridSystem';
-
+import { buildShortestPath } from '../../algorithms/shortestPath';
+import { AlgorithmResponse } from '../../types/AlgorithmResponse';
 enum Algorithms
 {
     BFS = 0,
@@ -24,20 +25,24 @@ const Navbar = () => {
 
         clearAllExploreds();
         const rowCol = getRowColById(startIndex);
-        console.log("ROW : "+rowCol.row);
-        console.log("COL : "+rowCol.col);
+        let res;
         switch(selectedAlgo)
         {
             case (Algorithms.BFS):
-                 await bfsTryToFind(rowCol.row,rowCol.col);
+                 res = await bfsTryToFind(rowCol.row,rowCol.column);
                  break;
             case (Algorithms.DFS):
-                await dfsTryToFind(rowCol.row,rowCol.col);
+                res = await dfsTryToFind(rowCol.row,rowCol.column);
                 break;
             default:
                 break;
         }
-       
+        if(!res || !res.founds)
+            return;
+        
+        let endNode = res.endNode!;
+        await buildShortestPath(rowCol,endNode);
+        console.log("finished");
     }
 
   return (

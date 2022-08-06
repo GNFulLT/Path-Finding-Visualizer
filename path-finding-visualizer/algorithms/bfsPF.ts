@@ -3,17 +3,12 @@ import {explore} from "../Hooks/useGridSystem";
 import {isValidNode} from "../Hooks/useGridSystem";
 import {followExplore} from "../Hooks/useGridSystem";
 import {deFollowLastExplore,startAlgorithm,finishAlgorithm} from "../Hooks/useGridSystem";
-
-const timer = (ms:number) => new Promise(res => setTimeout(res, ms))
-
-type Node =
-{
-    row:number
-    column:number
-}
+import { Node } from "../types/Node";
+import { sleep } from "../utils/sleep";
+import { AlgorithmResponse } from "../types/AlgorithmResponse";
 
 
-export const tryToFind = async(startRow:number,startColumn:number) =>
+export const tryToFind = async(startRow:number,startColumn:number) : Promise<AlgorithmResponse> => 
 {
     startAlgorithm();
 
@@ -50,7 +45,7 @@ export const tryToFind = async(startRow:number,startColumn:number) =>
               { 
                 deFollowLastExplore();
                 finishAlgorithm();
-                return;
+                return {isFound:true,endNode:{row:nRow,column:nCol},founds:queue};
               }
 
             if(isNext)
@@ -66,7 +61,7 @@ export const tryToFind = async(startRow:number,startColumn:number) =>
         }
         if(wait == 16)
         {
-            await timer(80);
+            await sleep(80);
             wait = 0;
         }
         else if(wait == 2)
@@ -81,4 +76,5 @@ export const tryToFind = async(startRow:number,startColumn:number) =>
         }
     }
     finishAlgorithm();
+    return ({isFound:false} as AlgorithmResponse)
 }
